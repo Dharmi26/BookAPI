@@ -1,3 +1,6 @@
+require("dotenv").config();
+
+//Frame work
 const express = require("express");
 const mongoose = require("mongoose");
 // Database
@@ -11,9 +14,8 @@ const booky = express();
 booky.use(express.json());
 
 //Establish connection for Database
-mongoose.connect(
-  "mongodb+srv://Dharmi:yqnHL8G5@kvysbB@mydata.p4vcm.mongodb.net/Booky?retryWrites=true&w=majority",
-  {
+mongoose
+  .connect( process.env.MONGO_URL,{
      useNewUrlParser: true,
      useUnifiedTopology: true,
      useFindAndModify: false,

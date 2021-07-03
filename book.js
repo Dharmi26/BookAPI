@@ -7,7 +7,7 @@ const BookSchema = mongoose.Schema({
   pubDate: String,
   language: String,
   numPage: Number,
-  author: [Nubmber],
+  author: [Number],
   publications: Number,
   category: [String],
 });

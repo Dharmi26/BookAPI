@@ -21,20 +21,23 @@ Router.get("/", async (req, res) => {
   Parameters      isbn
   Method          GET
   */
-Router.get("/:isbn", (req, res) => {
-  const getSpecificAuthors = database.authors.filter((author) =>
-    author.books.includes(req.params.isbn)
-  );
+  Router.get("/:isbn", async (req, res) => {
+    try {
+      const getSpecificAuthors = database.authors.filter((author) =>
+        author.books.includes(req.params.isbn)
+      );
 
-  if (getSpecificAuthors.length === 0) {
-    return res.json({
-      error: `No author found for the book ${req.params.isbn}`,
-    });
-  }
+      if (getSpecificAuthors.length === 0) {
+        return res.json({
+          error: `No author found for the book ${req.params.isbn}`,
+        });
+      }
 
-  return res.json({ authors: getSpecificAuthors });
+      return res.json({ authors: getSpecificAuthors });
+    } catch (error) {
+      return res.json({ error: error.message });
+    }
 });
-
 /*
 Route           /author/new
 Description     add new author
